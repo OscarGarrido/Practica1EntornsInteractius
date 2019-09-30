@@ -1,13 +1,14 @@
+//NOMS: Patricia Huete i Oscar Garrido
+//LINK: https://oscargarrido.github.io/Practica1EntornsInteractius/
+
 //color de fons #ECDDBE que es rgb(236,221,190)
 //color vermell #C1322C que es rgb(193,50,44) 
 //color groc #F1BB00 que es rgb(241,187,0)
 //color blau #0268BD que es rgb(2,104,189)
 
-//Tarda 7 segons justos en fer la animació completa
+//Declaració de variables:
 let myFont;
 let y = 0;
-let x = 0;
-let z = 0;
 let size = 0;
 let i = 0;
 let j;
@@ -26,6 +27,7 @@ let allrelatedcolors_r;
 let allrelatedcolors_y;
 let allrelatedcolors_b;
 
+//Per carregar correctament la tipografia:
 function preload(){
     myFont = loadFont('NovaSquare.ttf');
 }
@@ -36,8 +38,6 @@ function setup() {
     frameRate(10);
     textFont(myFont);
     y = 0;
-    x = 0;
-    z = 0;
     size = 0;
     i = random(3);
     Opcio = random(3);
@@ -56,7 +56,7 @@ function setup() {
     allrelatedcolors_y = [];
     allrelatedcolors_b = [];
 
-    //Inserto dins el vector tots els colors relacionats amb el vermell:
+    //Inserto dins el vector corresponent tots els colors relacionats amb el vermell:
     allrelatedcolors_r.push(color(37, 9, 2));
     allrelatedcolors_r.push(color(56, 4, 14));
     allrelatedcolors_r.push(color(100, 13, 20));
@@ -128,7 +128,7 @@ function setup() {
     allrelatedcolors_r.push(color(28, 31, 51));
     allrelatedcolors_r.push(color(252, 247, 248));
 
-    //Inserto dins el vector tots els colors relacionats amb el blau:
+    //Inserto dins el vector corresponent tots els colors relacionats amb el blau:
     allrelatedcolors_b.push(color(143, 201, 58));
     allrelatedcolors_b.push(color(228, 204, 55));
     allrelatedcolors_b.push(color(225, 131, 53));
@@ -200,7 +200,7 @@ function setup() {
     allrelatedcolors_b.push(color(241, 153, 83));
     allrelatedcolors_b.push(color(196, 115, 53));
 
-    //Inserto dins el vector tots els colors relacionats amb el groc:
+    //Inserto dins el vector corresponent tots els colors relacionats amb el groc:
     allrelatedcolors_y.push(color(197, 123, 87));
     allrelatedcolors_y.push(color(152, 71, 62));
     allrelatedcolors_y.push(color(7, 9, 15));
@@ -273,6 +273,22 @@ function setup() {
     allrelatedcolors_y.push(color(191, 26, 47));
 }
 
+//Gran part del nostre programa es basa en la funció "draw". El que fem aqui és primer de tot és decidir de forma "random"
+//quina de les tres animacions que tenim programades es mostrarà cada vegada de "reiniciem" el canvas:
+//
+//En cas que es mostri la primera, el que fem és dibuixar durant 7 segons el poster de Bauhaus usant tamanys i colors aleatoris
+//de les 3 paletes que hem creat al inici del codi per tots els cuadrats. A més, els 4 textos inferiors anirán apareixent
+//en ordre aleatori cada cert temps fins al final de la animació.
+//
+//En cas que es mostri la segona, el que fem és dibuixar diferents conjunts de "columnes" del mateix tamany però en aquest cas
+//ho fem a temps diferents i en ordre aleatori. A part, els 4 textos inferiors es comporten igual que en el cas anterior però
+//amb la diferència que es començaran a dibuixar quan toqui dibuixar el conjunt de "columnes" del color vermell.
+//
+//I en el últim i tercer cas, aquesta última animació el què fa és dibuixar totes les "columnes" al mateix temps però
+//decidint de forma aleatòria de quin color es pinten els últims cuadrats. A més, els colors dels quals es van pintant
+//els cuadrats centrals també es decideixen de forma "random" desde les tres paletes de colors que ja tenim definides.
+//A més, tots els cuadrats tenen el mateix tamany.
+//A part, els 4 textos inferiors es comporten igual que en el primer cas de tots.
 function draw() {
 
     if (i <= 1) {
@@ -377,6 +393,7 @@ function draw() {
     } else if ((i > 1) && (i <= 2)) {
         if (Opcio <= 1 && Opcio1 == false) {
             if (y <= 70) {
+                noStroke();
                 lletres();
                 stroke(0, 0, 0);
                 fill(random(allrelatedcolors_r));
@@ -408,63 +425,66 @@ function draw() {
                 fill(193, 50, 44);
                 rect(450 + y, 520 - y, 70, 70);
                 Opcio1 = true;
+                y=0;
             }
         } else if ((Opcio > 1) && (Opcio <= 2) && Opcio2 == false) {
-            if (x <= 70) {
+            if (y <= 70) {
                 stroke(0, 0, 0);
                 fill(random(allrelatedcolors_y));
-                rect(30 + x, 240 - x, 70, 70);
+                rect(30 + y, 240 - y, 70, 70);
                 fill(random(allrelatedcolors_y));
-                rect(170 + x, 100 - x, 70, 70);
+                rect(170 + y, 100 - y, 70, 70);
                 fill(random(allrelatedcolors_y));
-                rect(170 + x, 520 - x, 70, 70);
+                rect(170 + y, 520 - y, 70, 70);
                 fill(random(allrelatedcolors_y));
-                rect(310 + x, 380 - x, 70, 70);
+                rect(310 + y, 380 - y, 70, 70);
                 fill(random(allrelatedcolors_y));
-                rect(450 + x, 240 - x, 70, 70);
+                rect(450 + y, 240 - y, 70, 70);
 
-                x++;
+                y++;
             } else {
                 stroke(0, 0, 0);
                 fill(241, 187, 0);
-                rect(30 + x, 240 - x, 70, 70);
+                rect(30 + y, 240 - y, 70, 70);
                 fill(241, 187, 0);
-                rect(170 + x, 100 - x, 70, 70);
+                rect(170 + y, 100 - y, 70, 70);
                 fill(241, 187, 0);
-                rect(170 + x, 520 - x, 70, 70);
+                rect(170 + y, 520 - y, 70, 70);
                 fill(241, 187, 0);
-                rect(310 + x, 380 - x, 70, 70);
+                rect(310 + y, 380 - y, 70, 70);
                 fill(241, 187, 0);
-                rect(450 + x, 240 - x, 70, 70);
+                rect(450 + y, 240 - y, 70, 70);
                 Opcio2 = true;
+                y=0;
             }
         } else if ((Opcio > 2) && (Opcio <= 3)&& Opcio3 == false){
-            if (z <= 70) {
+            if (y <= 70) {
                 stroke(0, 0, 0);
                 fill(random(allrelatedcolors_b));
-                rect(30 + z, 380 - z, 70, 70);
+                rect(30 + y, 380 - y, 70, 70);
                 fill(random(allrelatedcolors_b));
-                rect(170 + z, 240 - z, 70, 70);
+                rect(170 + y, 240 - y, 70, 70);
                 fill(random(allrelatedcolors_b));
-                rect(310 + z, 100 - z, 70, 70);
+                rect(310 + y, 100 - y, 70, 70);
                 fill(random(allrelatedcolors_b));
-                rect(310 + z, 520 - z, 70, 70);
+                rect(310 + y, 520 - y, 70, 70);
                 fill(random(allrelatedcolors_b));
-                rect(450 + z, 380 - z, 70, 70);
-                z++;
+                rect(450 + y, 380 - y, 70, 70);
+                y++;
             } else {
                 stroke(0, 0, 0);
                 fill(2, 104, 189);
-                rect(30 + z, 380 - z, 70, 70);
+                rect(30 + y, 380 - y, 70, 70);
                 fill(2, 104, 189);
-                rect(170 + z, 240 - z, 70, 70);
+                rect(170 + y, 240 - y, 70, 70);
                 fill(2, 104, 189);
-                rect(310 + z, 100 - z, 70, 70);
+                rect(310 + y, 100 - y, 70, 70);
                 fill(2, 104, 189);
-                rect(310 + z, 520 - z, 70, 70);
+                rect(310 + y, 520 - y, 70, 70);
                 fill(2, 104, 189);
-                rect(450 + z, 380 - z, 70, 70);
+                rect(450 + y, 380 - y, 70, 70);
                 Opcio3 = true;
+                y=0;
             }
         } else{
             if(Opcio1 == false || Opcio2 == false || Opcio3 == false){
@@ -558,6 +578,8 @@ function draw() {
     }
 }
 
+//Aquesta funció "lletres" és la que fa que apareguin els textos inferiors en un ordre "random" cada vegada que
+//fas "reset" de la animació:
 function lletres(){
     if (y == 17 || y == 34 || y == 51 || y == 68) {
 
@@ -805,13 +827,12 @@ function lletres(){
     }
 }
 
+//Aquestes dos ultimes funcions son les que fan que es faci "reset" de la animació quan fas click o mous el telèfon:
 function mouseClicked() {
 
     clear();
     i = random(3);
     y = 0;
-    x = 0;
-    z = 0;
     background(236, 221, 190);
     Opcio = random(3);
 
@@ -830,8 +851,6 @@ function deviceShaken() {
     clear();
     i = random(3);
     y = 0;
-    x = 0;
-    z = 0;
     background(236, 221, 190);
     Opcio = random(3);
 
